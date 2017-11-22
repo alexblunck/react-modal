@@ -1,4 +1,7 @@
 # react-modal
+
+[![Latest Version on NPM](https://img.shields.io/npm/v/@blunck/react-modal.svg?style=flat-square)](https://www.npmjs.com/package/@blunck/react-modal)
+
 Simple modals in react
 
 ## Installation
