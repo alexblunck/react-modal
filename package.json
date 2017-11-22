@@ -10,7 +10,7 @@
     "lint": "eslint src/*.js src/**/*.js",
     "build:js": "babel src -d dist",
     "build:styles": "postcss src/index.css -o dist/index.css -r --no-map -u precss -u autoprefixer",
-    "build": "run-s build:*",
+    "build": "rm -rf dist && run-s build:*",
     "dev": "run-p 'build:* -- --watch'",
     "prepare": "npm run build"
   },
