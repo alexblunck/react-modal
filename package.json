@@ -4,7 +4,7 @@
   "description": "Simple modals in react",
   "main": "dist/index.js",
   "files": [
-    "dist/index.css"
+    "dist"
   ],
   "scripts": {
     "lint": "eslint src/*.js src/**/*.js",
