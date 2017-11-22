@@ -1,0 +1,47 @@
+/**
+ * Component
+ * Modal
+ */
+
+.Modal {
+    width: 600px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+
+/**
+ * Header
+ */
+
+.Modal
+.modal-header {
+    height: 60px;
+    position: relative;
+
+    & .title {
+        text-align: center;
+        line-height: 60px;
+
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(50, 50, 50);
+    }
+
+    & .icon-dismiss {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        transition: opacity .2s;
+
+        & svg * { fill: rgb(120, 120, 120); }
+        &:hover { opacity: .6; }
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@blunck/react-modal",
+  "version": "0.1.0",
+  "description": "Simple modals in react",
+  "main": "dist/index.js",
+  "files": [
+    "dist/index.css"
+  ],
+  "scripts": {
+    "lint": "eslint src/*.js src/**/*.js",
+    "build:js": "babel src -d dist",
+    "build:styles": "postcss src/index.css -o dist/index.css -r --no-map -u precss -u autoprefixer",
+    "build": "run-s build:*",
+    "dev": "run-p 'build:* -- --watch'",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://alexblunck@github.com/alexblunck/react-modal.git"
+  },
+  "keywords": [
+    "react",
+    "modal"
+  ],
+  "author": "Alexander Blunck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexblunck/react-modal/issues"
+  },
+  "homepage": "https://github.com/alexblunck/react-modal#readme",
+  "devDependencies": {
+    "autoprefixer": "7.1.6",
+    "babel-cli": "6.26.0",
+    "babel-eslint": "^8.0.2",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "eslint": "4.11.0",
+    "eslint-plugin-react": "^7.5.1",
+    "npm-run-all": "4.1.2",
+    "postcss-cli": "4.1.1",
+    "precss": "2.0.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1"
+  }
+}
