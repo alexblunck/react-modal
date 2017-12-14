@@ -74,8 +74,9 @@ export default class Modal extends React.Component {
     renderContent() {
         if (this.props.component) {
             const Content = this.props.component
+            const props = this.props.options.props
 
-            return <Content />
+            return <Content {...props} />
         }
     }
 

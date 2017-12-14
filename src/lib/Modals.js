@@ -18,6 +18,7 @@ export default class Modals extends React.Component {
      * @param {Component} component     - Component to use as modal content
      * @param {Object}    options
      * @param {String}    options.title - Header title
+     * @param {Object}    options.props - Props to pass to component
      */
     static display(component, options = {}) {
         Modals.instance.display(component, options)
@@ -73,6 +74,11 @@ export default class Modals extends React.Component {
         if (this.state.animating || this.state.visible) {
             return
         }
+
+        options = Object.assign({}, {
+            title: null,
+            props: {}
+        }, options)
 
         this.isolate(true)
 
