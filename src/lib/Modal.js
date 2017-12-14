@@ -16,7 +16,7 @@ export default class Modal extends React.Component {
     }
 
     componentDidMount() {
-        this.contentElem = this.elem.querySelector('.modal-content')
+        this.contentElem = this.elem.querySelector('.react-modal-content')
 
         this.ps = new PerfectScrollbar(this.contentElem, {
             suppressScrollX: true
@@ -46,7 +46,7 @@ export default class Modal extends React.Component {
             <div className='Modal' ref={e => this.elem = e}>
                 {this.renderHeader()}
 
-                <div className="modal-content">
+                <div className="react-modal-content">
                     {this.renderContent()}
                 </div>
             </div>
@@ -61,7 +61,7 @@ export default class Modal extends React.Component {
         const { title } = this.props.options
 
         return (
-            <div className="modal-header">
+            <div className="react-modal-header">
                 <div className="title">{title}</div>
 
                 <div className="icon-dismiss" onClick={this.dismiss}>

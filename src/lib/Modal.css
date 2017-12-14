@@ -17,7 +17,7 @@
 /* Header */
 
 .Modal
-.modal-header {
+.react-modal-header {
     flex-shrink: 0;
     height: 60px;
     position: relative;
@@ -51,7 +51,7 @@
 }
 
 .Modal.show-header-border
-.modal-header {
+.react-modal-header {
     border-bottom-color:rgb(235, 235, 235);
 }
 
@@ -59,7 +59,7 @@
 /* Content */
 
 .Modal
-.modal-content {
+.react-modal-content {
     flex: 1 1 auto;
     padding: 20px 40px;
     position: relative;
