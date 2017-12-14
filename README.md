@@ -36,7 +36,8 @@ Modals.display(MyComponent, {
 })
 ```
 #### Options:
-- `title` {String}: Title to display in modal header.
+- `title` {String}: Title to display in modal header
+- `props` {Object}: Props to pass to component
 
 ## Dismiss Modal
 Since you can currently only display a single modal at a time, you can use the `Modals.dismiss` method to dismiss that modal:
