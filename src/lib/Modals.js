@@ -20,6 +20,7 @@ export default class Modals extends React.Component {
      * @param {String}    options.title    - Header title
      * @param {Number}    [options.width]  - Window width
      * @param {Number}    [options.height] - Window max height
+     * @param {Number}    [padding]        - Window content padding
      * @param {Object}    options.props    - Props to pass to component
      */
     static display(component, options = {}) {

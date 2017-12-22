@@ -43,8 +43,9 @@ export default class Modal extends React.Component {
     }
 
     render() {
-        const { width, height } = this.props.options
+        const { width, height, padding } = this.props.options
         const style = {}
+        const contentStyle = {}
 
         if (width) {
             style.width = `${width}px`
@@ -54,11 +55,15 @@ export default class Modal extends React.Component {
             style.maxHeight = `${height}px`
         }
 
+        if (typeof padding === 'number') {
+            contentStyle.padding = `${padding/2}px ${padding}px`
+        }
+
         return (
             <div className='Modal' style={style} ref={e => this.elem = e}>
                 {this.renderHeader()}
 
-                <div className="react-modal-content">
+                <div className="react-modal-content" style={contentStyle}>
                     {this.renderContent()}
                 </div>
             </div>
