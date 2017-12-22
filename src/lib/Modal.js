@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import PerfectScrollbar from 'perfect-scrollbar'
 import Modals from './Modals'
 import IconDismiss from './IconDismiss'
@@ -42,8 +43,19 @@ export default class Modal extends React.Component {
     }
 
     render() {
+        const { width, height } = this.props.options
+        const style = {}
+
+        if (width) {
+            style.width = `${width}px`
+        }
+
+        if (height) {
+            style.maxHeight = `${height}px`
+        }
+
         return (
-            <div className='Modal' ref={e => this.elem = e}>
+            <div className='Modal' style={style} ref={e => this.elem = e}>
                 {this.renderHeader()}
 
                 <div className="react-modal-content">
@@ -109,5 +121,5 @@ export default class Modal extends React.Component {
 
 Modal.propTypes = {
     component: PropTypes.any,
-    options: PropTypes.object
+    options: PropTypes.object.isRequired
 }

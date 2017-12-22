@@ -15,10 +15,12 @@ export default class Modals extends React.Component {
     /**
      * Display modal.
      *
-     * @param {Component} component     - Component to use as modal content
+     * @param {Component} component        - Component to use as modal content
      * @param {Object}    options
-     * @param {String}    options.title - Header title
-     * @param {Object}    options.props - Props to pass to component
+     * @param {String}    options.title    - Header title
+     * @param {Number}    [options.width]  - Window width
+     * @param {Number}    [options.height] - Window max height
+     * @param {Object}    options.props    - Props to pass to component
      */
     static display(component, options = {}) {
         Modals.instance.display(component, options)
@@ -37,7 +39,8 @@ export default class Modals extends React.Component {
         this.state = {
             animating: false,
             visible: false,
-            component: null
+            component: null,
+            options: {}
         }
     }
 
