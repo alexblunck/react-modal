@@ -12,7 +12,7 @@
     background-color: #fff;
     border-radius: 2px;
 
-    .react-modal-header {
+    .ModalHeader {
         flex-shrink: 0;
     }
 }
@@ -21,14 +21,20 @@
 // Header
 
 .Modal
-.react-modal-header {
+.ModalHeader {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 60px;
     position: relative;
     border-bottom: 1px solid transparent;
+    text-align: center;
     transition: border-bottom-color .2s;
+
+    .tools {
+        padding-left: 25px;
+        position: relative;
+        z-index: 1;
+    }
 
     .title {
         width: 100%;
@@ -47,7 +53,8 @@
         align-items: center;
         width: 60px;
         height: 60px;
-        position: relative;
+        position: absolute;
+        right: 0;
         z-index: 1;
         cursor: pointer;
         transition: opacity .2s;
@@ -58,55 +65,15 @@
 }
 
 .Modal.show-header-border
-.react-modal-header {
+.ModalHeader {
     border-bottom-color:rgb(235, 235, 235);
 }
 
 
-// Header - Button
+// Body
 
 .Modal
-.react-modal-header
-button {
-    $height: 30px;
-    $blue: #108df6;
-    $green: #31ca50;
-
-    height: $height;
-    margin-left: 25px;
-    padding: 0 25px;
-    position: relative;
-    z-index: 1;
-
-    background-color: transparent;
-    border-radius: 4px;
-    border: 0;
-    outline: 0;
-    background-color: $green;
-
-    color: #fff;
-    text-align: center;
-    font-size: 11px;
-    font-weight: 400;
-    text-decoration: none;
-    line-height: $height - 2px;
-    letter-spacing: .06em;
-
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background-color .15s, border-color .15s, color .15s;
-
-    &:hover {
-        background-color: darken($green, 10%);
-        outline: 0;
-    }
-}
-
-
-// Content
-
-.Modal
-.react-modal-content {
+.ModalBody {
     flex: 1 1 auto;
     padding: 20px 40px;
     position: relative;

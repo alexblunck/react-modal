@@ -1,9 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
 import isolatedScroll from 'isolated-scroll'
-import Modal from './Modal'
+import { Modal } from './Modal'
 
-export default class Modals extends React.Component {
+export class Modals extends React.Component {
 
     /**
      * Singleton instance.

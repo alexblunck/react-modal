@@ -1,80 +1,55 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import PerfectScrollbar from 'perfect-scrollbar'
-import Modals from './Modals'
-import IconDismiss from './IconDismiss'
+import classNames from 'classnames'
 
-export default class Modal extends React.Component {
+import { Modals } from './Modals'
+import { ModalHeader } from './ModalHeader'
+import { ModalBody } from './ModalBody'
+
+export class Modal extends React.Component {
 
     constructor(props) {
         super(props)
 
-        this.state = {}
-        this.componentInstance = null
+        this.state = {
+            headerBorder: false
+        }
 
-        this.handleButtonClick = this.handleButtonClick.bind(this)
         this.handleScrollDown = this.handleScrollDown.bind(this)
         this.handleScrollUp = this.handleScrollUp.bind(this)
-    }
-
-    componentDidMount() {
-        this.contentElem = this.elem.querySelector('.react-modal-content')
-
-        this.ps = new PerfectScrollbar(this.contentElem, {
-            suppressScrollX: true
-        })
-
-        this.contentElem.addEventListener('ps-scroll-down', this.handleScrollDown)
-        this.contentElem.addEventListener('ps-y-reach-start', this.handleScrollUp)
     }
 
     componentDidUpdate(prevProps) {
         // Update scrollbar / header border if component changes
         if(prevProps.component !== this.props.component) {
-            this.ps.update()
+            this.bodyInstance.updateScrollbar()
             this.handleScrollUp()
         }
     }
 
-    componentWillUnmount() {
-        this.ps.destroy()
-        this.ps = null
-        this.contentElem.removeEventListener('ps-scroll-down', this.handleScrollDown)
-        this.contentElem.removeEventListener('ps-y-reach-start', this.handleScrollUp)
-    }
-
     /**
-     * Handle header button click event.
-     */
-    handleButtonClick() {
-        if (this.componentInstance.handleModalButtonClick) {
-            this.componentInstance.handleModalButtonClick.call(this.componentInstance)
-        }
-    }
-
-    /**
-     * Handle ps-scroll-down event.
+     * Handle body scroll down.
      */
     handleScrollDown() {
-        this.elem.classList.add('show-header-border')
+        this.setState({ headerBorder: true })
     }
 
     /**
-     * Handle ps-y-reach-star event.
+     * Handle body scroll up.
      */
     handleScrollUp() {
-        this.elem.classList.remove('show-header-border')
+        this.setState({ headerBorder: false })
     }
 
     /**
      * Dismiss modal.
      */
-    dismiss() {
+    handleDismiss() {
         Modals.dismiss()
     }
 
     render() {
-        const { width, height, padding } = this.props.options
+        const { width, height, padding, title } = this.props.options
         const style = {}
         const contentStyle = {}
 
@@ -90,43 +65,42 @@ export default class Modal extends React.Component {
             contentStyle.padding = `${padding/2}px ${padding}px`
         }
 
-        return (
-            <div className='Modal' style={style} ref={e => this.elem = e}>
-                {this.renderHeader()}
+        const classes = classNames('Modal', {
+            'show-header-border': this.state.headerBorder
+        })
 
-                <div className="react-modal-content" style={contentStyle}>
-                    {this.renderContent()}
-                </div>
+        return (
+            <div className={classes} style={style} ref={e => this.elem = e}>
+                {/* Header */}
+                <ModalHeader
+                    title={title}
+                    toolsRef={e => this.headerTools = e}
+                    onDismiss={this.handleDismiss}
+                />
+
+                {/* Body */}
+                <ModalBody
+                    ref={e => this.bodyInstance = e}
+                    onScrollUp={this.handleScrollUp}
+                    onScrollDown={this.handleScrollDown}
+                >
+                    {this.renderContentComponent()}
+                </ModalBody>
             </div>
         )
     }
 
-    renderHeader() {
-        if (!this.props.component) {
-            return
-        }
-
-        const { title, button } = this.props.options
-
-        return (
-            <div className="react-modal-header">
-                {button && <button onClick={this.handleButtonClick}>{button}</button>}
-
-                <div className="title">{title}</div>
-
-                <div className="icon-dismiss" onClick={this.dismiss}>
-                    <IconDismiss />
-                </div>
-            </div>
-        )
-    }
-
-    renderContent() {
+    renderContentComponent() {
         if (this.props.component) {
-            const Content = this.props.component
+            const ContentComponent = this.props.component
             const props = this.props.options.props
 
-            return <Content {...props} ref={e => this.componentInstance = e} />
+            // Pass reactModal prop to content component
+            props.reactModal = {
+                headerTools: this.headerTools
+            }
+
+            return <ContentComponent {...props} />
         }
     }
 
