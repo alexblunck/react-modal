@@ -2,17 +2,11 @@
   "name": "@blunck/react-modal",
   "version": "0.3.0",
   "description": "Simple modals in react",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
+  "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint src/*.js src/**/*.js",
-    "build:js": "babel src -d dist",
-    "build:styles": "postcss src/index.css -o dist/index.css -r --no-map -u precss -u autoprefixer",
-    "build": "rm -rf dist && run-s build:*",
-    "dev": "run-p 'build:* -- --watch'",
-    "prepare": "npm run build"
+    "dev": "babel ./src -d ./lib -w",
+    "build": "babel ./src -d ./lib",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -36,16 +30,12 @@
     "react": "^16.2.0"
   },
   "devDependencies": {
-    "autoprefixer": "7.2.3",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.0.3",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "eslint": "4.13.1",
-    "eslint-plugin-react": "^7.5.1",
-    "npm-run-all": "4.1.2",
-    "postcss-cli": "4.1.1",
-    "precss": "2.0.0"
+    "eslint-plugin-react": "^7.5.1"
   }
 }

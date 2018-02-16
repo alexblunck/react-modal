@@ -1,8 +1,0 @@
-/**
- * @blunck/react-modal
- */
-
-@import '../node_modules/perfect-scrollbar/css/perfect-scrollbar';
-
-@import 'lib/Modals';
-@import 'lib/Modal';

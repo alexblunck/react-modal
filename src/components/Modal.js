@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import PerfectScrollbar from 'perfect-scrollbar'
 import Modals from './Modals'
 import IconDismiss from './IconDismiss'
@@ -11,9 +10,11 @@ export default class Modal extends React.Component {
         super(props)
 
         this.state = {}
+        this.componentInstance = null
 
-        this.onScrollDown = this.onScrollDown.bind(this)
-        this.onScrollToTop = this.onScrollToTop.bind(this)
+        this.handleButtonClick = this.handleButtonClick.bind(this)
+        this.handleScrollDown = this.handleScrollDown.bind(this)
+        this.handleScrollUp = this.handleScrollUp.bind(this)
     }
 
     componentDidMount() {
@@ -23,23 +24,53 @@ export default class Modal extends React.Component {
             suppressScrollX: true
         })
 
-        this.contentElem.addEventListener('ps-scroll-down', this.onScrollDown)
-        this.contentElem.addEventListener('ps-y-reach-start', this.onScrollToTop)
+        this.contentElem.addEventListener('ps-scroll-down', this.handleScrollDown)
+        this.contentElem.addEventListener('ps-y-reach-start', this.handleScrollUp)
     }
 
     componentDidUpdate(prevProps) {
         // Update scrollbar / header border if component changes
         if(prevProps.component !== this.props.component) {
             this.ps.update()
-            this.onScrollToTop()
+            this.handleScrollUp()
         }
     }
 
     componentWillUnmount() {
         this.ps.destroy()
         this.ps = null
-        this.contentElem.removeEventListener('ps-scroll-down', this.onScrollDown)
-        this.contentElem.removeEventListener('ps-y-reach-start', this.onScrollToTop)
+        this.contentElem.removeEventListener('ps-scroll-down', this.handleScrollDown)
+        this.contentElem.removeEventListener('ps-y-reach-start', this.handleScrollUp)
+    }
+
+    /**
+     * Handle header button click event.
+     */
+    handleButtonClick() {
+        if (this.componentInstance.handleModalButtonClick) {
+            this.componentInstance.handleModalButtonClick.call(this.componentInstance)
+        }
+    }
+
+    /**
+     * Handle ps-scroll-down event.
+     */
+    handleScrollDown() {
+        this.elem.classList.add('show-header-border')
+    }
+
+    /**
+     * Handle ps-y-reach-star event.
+     */
+    handleScrollUp() {
+        this.elem.classList.remove('show-header-border')
+    }
+
+    /**
+     * Dismiss modal.
+     */
+    dismiss() {
+        Modals.dismiss()
     }
 
     render() {
@@ -75,10 +106,12 @@ export default class Modal extends React.Component {
             return
         }
 
-        const { title } = this.props.options
+        const { title, button } = this.props.options
 
         return (
             <div className="react-modal-header">
+                {button && <button onClick={this.handleButtonClick}>{button}</button>}
+
                 <div className="title">{title}</div>
 
                 <div className="icon-dismiss" onClick={this.dismiss}>
@@ -93,33 +126,8 @@ export default class Modal extends React.Component {
             const Content = this.props.component
             const props = this.props.options.props
 
-            return <Content {...props} />
+            return <Content {...props} ref={e => this.componentInstance = e} />
         }
-    }
-
-    /**
-     * dismiss modal.
-     */
-    dismiss() {
-        Modals.dismiss()
-    }
-
-    /**
-     * Handle ps-scroll-down event.
-     *
-     * @param {Event} event
-     */
-    onScrollDown (event) {
-        this.elem.classList.add('show-header-border')
-    }
-
-    /**
-     * Handle ps-y-reach-star event.
-     *
-     * @param {Event} event
-     */
-    onScrollToTop (event) {
-        this.elem.classList.remove('show-header-border')
     }
 
 }
