@@ -34,8 +34,15 @@ export class ModalBody extends React.Component {
     }
 
     render() {
+        const { padding } = this.props.options
+        const style = {}
+
+        if (typeof padding === 'number') {
+            style.padding = `${padding/2}px ${padding}px`
+        }
+
         return (
-            <div className="ModalBody" ref={e => this.elem = e}>
+            <div className="ModalBody" style={style} ref={e => this.elem = e}>
                 {this.props.children}
             </div>
         )
@@ -44,6 +51,7 @@ export class ModalBody extends React.Component {
 }
 
 ModalBody.propTypes = {
+    options: PropTypes.object.isRequired,
     children: PropTypes.element,
     onScrollUp: PropTypes.func.isRequired,
     onScrollDown: PropTypes.func.isRequired

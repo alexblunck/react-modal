@@ -49,9 +49,8 @@ export class Modal extends React.Component {
     }
 
     render() {
-        const { width, height, padding, title } = this.props.options
+        const { width, height, title } = this.props.options
         const style = {}
-        const contentStyle = {}
 
         if (width) {
             style.width = `${width}px`
@@ -59,10 +58,6 @@ export class Modal extends React.Component {
 
         if (height) {
             style.maxHeight = `${height}px`
-        }
-
-        if (typeof padding === 'number') {
-            contentStyle.padding = `${padding/2}px ${padding}px`
         }
 
         const classes = classNames('Modal', {
@@ -80,6 +75,7 @@ export class Modal extends React.Component {
 
                 {/* Body */}
                 <ModalBody
+                    options={this.props.options}
                     ref={e => this.bodyInstance = e}
                     onScrollUp={this.handleScrollUp}
                     onScrollDown={this.handleScrollDown}
