@@ -10,8 +10,8 @@ module.exports = function (env, argv) {
     return {
         output: {
             path: path.resolve(__dirname, 'lib'),
-            filename: `react-modal.js`,
-            library: 'reactModal',
+            filename: `blunck-react-modal.js`,
+            library: 'blunckReactModal',
             libraryTarget: 'umd'
         },
         devtool: devtool,
