@@ -7,6 +7,11 @@ Simple modals in react
 ## Installation
 `npm i @blunck/react-modal`
 
+Import styles in your scss
+```scss
+@import '@blunck/react-modal/src/index.scss';
+```
+
 ## Getting Started
 Add `<Modals />` component to your app. This is where the modal is rendered.
 ```js

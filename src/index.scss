@@ -1,2 +1,9 @@
-@import './src/components/Modal';
-@import './src/components/Modals';
+// Vendor
+
+@import './styles/vendor/perfect-scrollbar';
+
+
+// Components
+
+@import './components/Modal';
+@import './components/Modals';
